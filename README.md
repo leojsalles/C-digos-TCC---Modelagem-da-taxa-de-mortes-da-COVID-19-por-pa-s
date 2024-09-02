@@ -1,7 +1,7 @@
 # Nome: Leonardo de Salles Amaral - Trabalho de Graduação A
 # Códigos TCC - Modelagem da taxa de mortes da COVID 19 por país
 
-# ------------------------------------------------------------------------------------ #
+# ----------------------------------------------------
 
 # Liberando os pacotes
 library(ggplot2)
@@ -10,9 +10,9 @@ library(dplyr)
 library(GGally)
 library(gamlss)
 
-#Visualizando o banco de dados
+# Visualizando o banco de dados
 View(BaseTGFiltroFinal)
-# ----------------------- DESCRITIVA -----------------------------
+# ----------------------- DESCRITIVA ------------------
 
 #Selecionando as covariaveis para nossa análise descritiva
 select_dataset<-dplyr::select(BaseTGFiltroFinal,	
@@ -41,14 +41,10 @@ select_dataset <- dplyr::rename(select_dataset,
 
 # Calcule a matriz de correlação
 matriz_cor <- cor(select_dataset)
-
-# Exibindo a matriz de correlação
 print(matriz_cor)
-
-# Gráfico das correlações
 ggcorr(select_dataset, label=T)
 
-# ---------------------------------------- Variável  Resposta -------------------------------------
+# ---------------------------------------- Variável  Resposta -------
 
 # Boxplot
 p <- ggplot(BaseTGFiltroFinal, aes(y = Mortes1MilhãoDePop)) +
@@ -64,8 +60,7 @@ summary(BaseTGFiltroFinal$Mortes1MilhãoDePop)
 hist(BaseTGFiltroFinal$Mortes1MilhãoDePop, breaks = 10, freq = TRUE, col = "darkblue", main = "",
      xlab = "Mortalidade por COVID-19", ylab = "Frequência")
 
-# ------------------------- Variáveis em estudo --------------------------------------------
-
+# ------------------------- Variáveis em estudo --------------
 
 ggplot(BaseTGFiltroFinal, aes(x = TxMortCard, y = Mortes1MilhãoDePop)) +
   geom_point(color = "darkblue") +
@@ -74,7 +69,7 @@ ggplot(BaseTGFiltroFinal, aes(x = TxMortCard, y = Mortes1MilhãoDePop)) +
     y = "Mortalidade por COVID-19",
   )
 
-# ----------------------------------------------------------------------------------
+# ------------------------------------------------------
 
 ggplot(BaseTGFiltroFinal, aes(x = TaxaMortalidadeInfantil, y = Mortes1MilhãoDePop)) +
   geom_point(color = "darkblue") +
@@ -83,7 +78,7 @@ ggplot(BaseTGFiltroFinal, aes(x = TaxaMortalidadeInfantil, y = Mortes1MilhãoDeP
     y = "Mortes por 1 Milhão de População"
   )
 
-# ----------------------------------------------------------------------------------
+# -------------------------------------------------------
 
 ggplot(BaseTGFiltroFinal, aes(x = TaxaFertilidade, y = Mortes1MilhãoDePop)) +
   geom_point(color = "darkblue") +
@@ -91,7 +86,7 @@ ggplot(BaseTGFiltroFinal, aes(x = TaxaFertilidade, y = Mortes1MilhãoDePop)) +
     x = "Taxa de fertilidade",
     y = "Mortes por 1 Milhão de População"
   )
-# ----------------------------------------------------------------------------------
+# --------------------------------------------------------
 
 ggplot(BaseTGFiltroFinal, aes(x = TaxaPopRural, y = Mortes1MilhãoDePop)) +
   geom_point(color = "darkblue") +
@@ -99,7 +94,7 @@ ggplot(BaseTGFiltroFinal, aes(x = TaxaPopRural, y = Mortes1MilhãoDePop)) +
     x = "Porcentagem da pop. rural",
     y = "Mortes por 1 Milhão de População"
   )
-#-------------------------------------------------------------------------
+#--------------------------------------------------------
 
 ggplot(BaseTGFiltroFinal, aes(x = TaxaPopUrb, y = Mortes1MilhãoDePop)) +
   geom_point(color = "darkblue") +
@@ -107,7 +102,7 @@ ggplot(BaseTGFiltroFinal, aes(x = TaxaPopUrb, y = Mortes1MilhãoDePop)) +
     x = "Porcentagem da pop. urbana",
     y = "Mortes por 1 Milhão de População"
   )
-# ----------------------------------------------------------------------------------
+# -------------------------------------------------------
 
 ggplot(BaseTGFiltroFinal, aes(x = IDH, y = Mortes1MilhãoDePop)) +
   geom_point(color = "darkblue") +
@@ -116,7 +111,7 @@ ggplot(BaseTGFiltroFinal, aes(x = IDH, y = Mortes1MilhãoDePop)) +
     y = "Mortes por 1 Milhão de População"
   )
 
-# ----------------------------------------------------------------------------------
+# ----------------------------------------------------------
 
 ggplot(BaseTGFiltroFinal, aes(x = ExpectatVida, y = Mortes1MilhãoDePop)) +
   geom_point(color = "darkblue") +
@@ -125,7 +120,7 @@ ggplot(BaseTGFiltroFinal, aes(x = ExpectatVida, y = Mortes1MilhãoDePop)) +
     y = "Mortes por 1 Milhão de População"
   )
 
-# ----------------------------------------------------------------------------------
+# -------------------------------------------------------
 
 ggplot(BaseTGFiltroFinal, aes(x = PIB, y = Mortes1MilhãoDePop)) +
   geom_point(color = "darkblue") +
@@ -134,14 +129,14 @@ ggplot(BaseTGFiltroFinal, aes(x = PIB, y = Mortes1MilhãoDePop)) +
     y = "Mortes por 1 Milhão de População"
   )
 
-# ----------------------------------------------------------------------------------
+# -------------------------------------------------------------
 
-# ------------------------------- DENSIDADES DE PROBABILIDADE  --------------------
+# ------------------- DENSIDADES DE PROBABILIDADE  -----------
 
 # LIBERANDO OS PACOTES
 library(ggplot2)
 library(actuar)
-#------------------------------- GAMA ---------------------------------------
+#------------------------------- GAMA ------------------------
 
 # Função para calcular shape e scale dados mu e sigma2 para Gamma
 calc_parameters_gamma <- function(mu, sigma2) {
@@ -187,7 +182,7 @@ ggplot(data) +
     legend.text = element_text(size = 10),
     legend.box = "vertical") # Garante que a legenda esteja em uma caixa vertical
     
-# ----------------------------------- WEIBULL -----------------------------------
+# ------------------------- WEIBULL ---------------
 
 
 # Função para calcular lambda e k dados mu e sigma2 para Weibull
@@ -247,11 +242,7 @@ ggplot(data) +
     legend.text = element_text(size = 10)
   )
 
-
-
-# ------------------------------- SOBREPOSIÇÃO -------------------------------------
-
-
+# ------------------ SOBREPOSIÇÃO ------------
 
 # Função para calcular shape e scale dados mu e sigma2 para Gamma
 calc_parameters_gamma <- function(mu, sigma2) {
@@ -260,7 +251,7 @@ calc_parameters_gamma <- function(mu, sigma2) {
   list(shape = shape, scale = scale)
 }
 
-# Parâmetros fornecidos
+# Parâmetros
 params_weibull <- list(
   calc_parameters_weibull(mu = 10, sigma2 = 4),
   calc_parameters_weibull(mu = 20, sigma2 = 4),
@@ -273,7 +264,6 @@ params_gamma <- list(
   calc_parameters_gamma(mu = 10, sigma2 = 25)
 )
 
-# Dados para o gráfico
 x <- seq(0, 40, length.out = 100)
 data <- data.frame(
   x = rep(x, 6),
@@ -327,9 +317,9 @@ ggplot(data) +
     legend.text = element_text(size = 10)
   )
 
-  # Construindo o Mapa Mundi para os países do banco de dados 
+# ------------------ MAPA MUNDI ------------
+  
 # liberando os pacotes necessários
-
 library(ggplot2)
 library(maps)
 library(dplyr)
