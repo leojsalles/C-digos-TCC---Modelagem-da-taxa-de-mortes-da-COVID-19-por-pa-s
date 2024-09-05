@@ -44,7 +44,7 @@ matriz_cor <- cor(select_dataset)
 print(matriz_cor)
 ggcorr(select_dataset, label=T)
 
-# ---------------------------------------- Variável  Resposta -------
+# ---------------------- Variável  Resposta -------
 
 # Boxplot
 p <- ggplot(BaseTGFiltroFinal, aes(y = Mortes1MilhãoDePop)) +
